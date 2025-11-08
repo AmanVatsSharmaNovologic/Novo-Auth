@@ -16,6 +16,7 @@ export function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
   const themeCookie = request.cookies.get(THEME_COOKIE)?.value;
+  const country = request.headers.get("x-vercel-ip-country") ?? undefined;
 
   if (!isThemeName(themeCookie)) {
     response.cookies.set(THEME_COOKIE, DEFAULT_THEME, {
@@ -30,7 +31,7 @@ export function middleware(request: NextRequest) {
     event: "request",
     context: {
       path: request.nextUrl.pathname,
-      country: request.geo?.country,
+      country,
       theme: themeCookie && isThemeName(themeCookie) ? themeCookie : DEFAULT_THEME,
     },
   });

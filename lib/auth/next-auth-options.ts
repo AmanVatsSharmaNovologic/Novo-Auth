@@ -126,21 +126,16 @@ export const authOptions: NextAuthOptions = {
         context: message,
       });
     },
-    async error(error) {
-      logError({
-        scope: "auth:events",
-        event: "error",
-        context: { error },
-      });
-    },
   },
   cookies: {
     sessionToken: {
       name: "__Secure-novo-session",
-      domain: process.env.NODE_ENV === "development" ? undefined : ".novologic.co",
-      path: "/",
-      sameSite: "lax",
-      secure: process.env.NODE_ENV !== "development",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV !== "development",
+      },
     },
   },
   debug: process.env.NODE_ENV !== "production",

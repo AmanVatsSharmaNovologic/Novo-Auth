@@ -42,7 +42,7 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: "h-12 px-6 text-base",
 };
 
-export const Button = forwardRef<HTMLElement, ButtonProps>(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     { 
       className, 
@@ -76,7 +76,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(
 
     return (
       <Component
-        ref={ref}
+        ref={ref as any}
         disabled={disabled || isLoading}
         className={cn(
           "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all focus-visible:ring-2 focus-visible:ring-[color:var(--accent-primary)] focus-visible:ring-offset-0 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60",

@@ -72,7 +72,8 @@ const createRetryLink = () =>
   });
 
 const createErrorLink = () =>
-  onError(({ graphQLErrors, networkError, operation }) => {
+  onError((err) => {
+    const { graphQLErrors, networkError, operation } = err as any;
     if (graphQLErrors?.length) {
       for (const graphQLError of graphQLErrors) {
         logError({

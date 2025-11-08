@@ -1,8 +1,4 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  type NormalizedCacheObject,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 import { logError, logInfo } from "@/lib/logging/console";
 
@@ -35,9 +31,7 @@ const resolveEndpoint = (override?: string) => {
   return computed;
 };
 
-export const createApolloClient = (
-  options: CreateApolloClientOptions = {},
-): ApolloClient<NormalizedCacheObject> => {
+export const createApolloClient = (options: CreateApolloClientOptions = {}) => {
   const endpoint = resolveEndpoint(options.endpoint);
 
   logInfo({
